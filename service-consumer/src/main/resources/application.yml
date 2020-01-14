@@ -1,0 +1,41 @@
+server:
+  port: 0
+
+eureka:
+  client:
+    enabled: false
+spring:
+  cloud:
+    zookeeper:
+      enabled: false
+  application:
+    name: service-consumer
+
+--- #Eureka
+spring:
+  profiles: eureka
+eureka:
+  server:
+    host: http://localhost
+    port: 8761
+  client:
+    register-with-eureka: true
+    service-url:
+      defaultZone: ${eureka.server.host}:${eureka.server.port}/eureka/
+    enabled: true
+
+
+--- #zookeep
+spring:
+  profiles: zookeeper
+  cloud:
+    zookeeper:
+      connectString: 192.168.245.128:2181
+      enabled: true
+  activemq:
+    broker-url:
+
+
+
+
+
