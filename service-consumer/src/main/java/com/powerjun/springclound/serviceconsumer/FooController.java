@@ -1,25 +1,25 @@
 package com.powerjun.springclound.serviceconsumer;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @author Jim
- * @date 2020/1/13
+ * @date 2020/1/19
  */
 @RestController
-public class EchoMessageController {
-
+@RequestMapping("/foo")
+public class FooController {
 
     @Autowired
-    private AbstractEchoService echoService;
+    private FooBean fooBean;
 
-
-    @RequestMapping("/echoMessage/{message}")
-    String echoMessage(@PathVariable String message) {
-
-        return echoService.echoMessage(message);
+    @GetMapping("/{message}")
+    public String bar(@PathVariable String message) {
+        return fooBean.echoMessage(message);
     }
+
 }
