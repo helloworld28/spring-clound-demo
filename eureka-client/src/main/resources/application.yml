@@ -1,9 +1,6 @@
 server:
-  port: 8089
+  port: 8091
 
-  spring:
-    application:
-      name: eureka-client
 
 eureka:
   client:
@@ -12,6 +9,10 @@ spring:
   cloud:
     zookeeper:
       enabled: false
+    consul:
+      enabled: false
+  application:
+    name: discovery-client-demo
 
 --- #Eureka
 spring:
@@ -25,6 +26,8 @@ eureka:
     service-url:
         defaultZone: ${eureka.server.host}:${eureka.server.port}/eureka/
     enabled: true
+  instance:
+    instance-id: ${sping.application.name}:${server.port}
 
 
 --- #zookeep
@@ -32,10 +35,18 @@ spring:
   profiles: zookeeper
   cloud:
     zookeeper:
-      connectString: 192.168.245.128:2181
+      connectString: localhost:2181
       enabled: true
-  activemq:
-    broker-url:
+
+--- # consul
+spring:
+  profiles: consul
+  cloud:
+    consul:
+      enabled: true
+
+
+
 
 
 
